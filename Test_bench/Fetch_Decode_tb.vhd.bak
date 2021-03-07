@@ -1,0 +1,20 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity Fetch_Decode_tb is
+end entity;
+
+architecture bhv of Fetch_Decode_tb is
+
+component Fetch_Decode is
+
+
+end component;
+
+
+begin
+
+	
+
+end bhv;

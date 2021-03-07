@@ -1,0 +1,42 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity ALU is
+	port(
+		A : in std_logic_vector(7 downto 0); 
+		B : in std_logic_vector(7 downto 0); 
+		Operator : in std_logic_vector(3 downto 0);
+		S : out std_logic_vector(7 downto 0);
+		Test_Zero : out std_logic
+	);
+end entity;
+
+architecture arch of ALU is
+
+signal tmp : std_logic_vector (7 downto 0);
+
+begin
+	
+	with operator select
+		tmp	<= 	A and B when "0000", 												-- 0000 for AND
+						A OR B when "0001",  												-- 0001 for OR
+						A XOR B when "0010",													-- 0010 for XOR
+						NOT A when "0011",													-- 0011 for NOT
+						A(6 downto 0) & A(7) when "0100",	 							-- 0100 for rotation left
+						A(0) & A(7 downto 1) when "0101",								-- 0101 for rotation right
+						A(6 downto 0) & '0' when "0110",									-- 0110 for shift right
+						'0' & A(7 downto 1) when "0111",									-- 0111 for shift left
+						std_logic_vector(unsigned (A) + unsigned(B)) when "1000",-- 1000 for addition
+						std_logic_vector(unsigned (A) - unsigned(B)) when "1001",-- 1001 for substraction
+						std_logic_vector(unsigned (A) - 1) when "1100",				-- 1100 for decrementation of A
+						A when "1111",															-- outputs the input (useful for test_zero)
+						A when others;
+				
+	with tmp select
+		Test_Zero	<= '1' when "00000000",
+							'0' when others;	
+				
+	S <= tmp;
+	
+end arch;
