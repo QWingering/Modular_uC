@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1587665254 source:c:\users\quent\desktop\modular_uc_coding\modular_uc_coding\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<vector>
+	<stdlib.h>
+
+1587898725 source:c:\users\quent\desktop\muc\modular_uc_coding\modular_uc_coding\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<vector>
+	<stdlib.h>
+
+1587898792 source:c:\users\quent\documents\quartus\muc\modular_uc_coding\modular_uc_coding\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<vector>
+	<stdlib.h>
+

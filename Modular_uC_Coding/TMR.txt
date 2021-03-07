@@ -1,0 +1,44 @@
+GOTO BEGIN
+GOTO INTERRUPT
+
+--------------------
+-- Setup function --
+--------------------
+.BEGIN
+LLW 1,0
+LLW 15,200
+
+-Move 0 to the TIMER config register 
+MVWM 1,3,1
+
+-Enable interrupt
+LLW 0,128
+MVWM 0,0,3
+LLW 0,255
+LLW 2,0
+
+-------------------
+-- Loop function --
+-------------------
+.LOOP
+MVWM 0,1,0
+GOTO LOOP
+
+------------------------
+-- Interrupt function --
+------------------------
+.INTERRUPT
+-Reset counter to 200 and clear interrupt flag
+MVWM 15,3,0
+MVWM 2,0,2
+
+-Invert register 0 for it the be send in the loop
+CALL INVERT
+RETURN
+
+---------------------
+-- Invert function --
+---------------------
+.INVERT
+OP NOTA,0,0,0
+RETURN
